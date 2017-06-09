@@ -1,6 +1,7 @@
 package mainpackage;
 
 import java.io.*;
+
 import java.util.*;
 import java.text.*;
 import java.math.*;
@@ -70,7 +71,28 @@ class Screen1 extends ConsoleUI
 	}
 	
 	public void contentBuilder() {
-		System.out.println("\n\n\ncreate content here\n\n\n");
+		System.out.println("Course Catalog for Summer 2017");
+		System.out.println("Course ID	Date		Course Description	Enrollment Limit");
+		
+	
+		//create a string arraylist
+
+		ArrayList<String> courseList = new ArrayList<String>();
+		//populate the array for now with a hardcoded list
+			
+			courseList.add("Java 102     	Summer 2017	Advanced Java		6 out of 12 students enrolled");
+			courseList.add("Java 101	Summer 2017	Intro to Java		10 out of 12 students enrolled");
+			courseList.add("Hadoop 223	Summer 2017	Advanced Hadoop		3 out of 20 students enrolled");
+			courseList.add("Data Sci 101	Summer 2017	Intro to Data Science	11 out of 12 students enrolled");
+		//sort the list of strings
+
+		Collections.sort(courseList);
+
+		//This will be coming from a file
+
+		for (String s : courseList) {
+		System.out.println(s);}
+		
 	}
 }
 
@@ -115,7 +137,26 @@ class Screen3 extends ConsoleUI
 	}
 	
 	public void contentBuilder() {
-		System.out.println("\n\n\ncreate content here\n\n\n");
+	    System.out.println("List of Courses");
+		
+		
+	
+		//create a string arraylist
+
+		ArrayList<String> courseList = new ArrayList<String>();
+		//populate the array for now with a hardcoded list
+			
+			
+			courseList.add("Hadoop 223");
+			courseList.add("Data Sci 101");
+
+		Collections.sort(courseList);
+
+		//This will be coming from a file
+
+		for (String s : courseList) {
+		System.out.println(s);}
+		
 	}
 
 }
