@@ -1,0 +1,58 @@
+5
+
+C Programming 1
+X.101.1
+00077
+Ken Tabacchi
+Introductory C language programming
+July 3 2007 to Sept. 8 2007
+W,F
+10:00 AM to 1:00 PM
+$450
+end
+
+Java Programming 1
+X.301.1
+00123
+Kesha Williams
+Introductory Java language programming
+July 5, 2007 to Sept. 12, 2007
+T,Th
+7:00 PM to 9.00 PM
+$450
+end
+
+Legal Contracts
+X.401.1
+00222
+Michaël Fischer
+Examine the essential principles of contract law
+July 6, 2007 to Sept. 9, 2007
+W
+6:00 PM to 9.00 PM
+$650
+end
+
+Financial Accounting
+X401.3
+00156
+Michael Miqdadi
+Explores the fundamental concepts of internal and external reporting in accounting
+June 26, 2017 to Sept. 17, 2017
+M,Th
+11:00 AM to 1:00 PM
+$350
+end
+
+Retirement Planning
+X510.5
+00345
+Jeffrey Nelson
+Learn the key components of a comprehensive retirement needs analysis
+June 26, 2017 to Sept 17, 2017
+F
+6:00 PM to 9:00 PM
+$450
+end
+ 
+

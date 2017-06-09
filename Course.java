@@ -6,94 +6,106 @@ import interfacepackage.*;
 public class Course 
 {
 	private String courseName;
-	private int courseId;
-	private String instructor_firstname;
-	private String instructor_lastname;
+	private String courseId;
+    private String regnum;
+	private String instructorname;
 	private String coursedescription;
-	private String date_start;
-	private String date_end;
-	private String[] class_days;
-	private String class_time;
+	private String coursedate;
+	private String classdays;
+	private String classtime;
+	private String classfee;
+	
 	
 	Course(){}
 	
-	Course(String courseName, int courseId)
-	{
-		
-	}
-
 	String GetCourseName()
 	{
-	   return(courseName);
+	   return courseName;
 	}
 	
-	int GetCourseID()
+	String GetCourseID()
 	{
-	   return(courseId);	
+	   return courseId;	
 	}
-	
-	String GetInstructorFirstName()
+
+	String GetRegistratrionNum()
 	{
-	   return(instructor_firstname);
+	   return regnum;	
 	}
-	
-	String GetInstructorLastName()
+
+	String GetInstructorName()
 	{
-	   return(instructor_lastname);
+	   return instructorname;
 	}
-	
+		
 	String GetCourseDescription()
 	{
-	   return(coursedescription);
+	   return coursedescription;
 	}
 	
-	String GetStartDate()
+	String GetClassDate()
 	{
-	   return(date_start);
+	   return coursedate;
 	}
 	
-	String GetEndDate()
+	String GetDays()
 	{
-	   return(date_end);
-	}
-	
-	String[] GetDays()
-	{
-	   return class_days;	
+	   return classdays;	
 	}
 	
 	String GetClassTime()
 	{
-		return class_time;
+	   return classtime;
+	}
+	
+	String GetClassFee()
+	{
+	   return classfee;
 	}
 	
 	
-	void SetInstructorFirstName(String name)
+	void SetCourseName(String name)
 	{
-	}
-	
-	void SetInstructorLastName(String name)
-	{
-	}
-	
-	void SetCourseDescription(String name)
-	{
-	}
-	
-	void SetStartDate(String name)
-	{
+	   courseName = name;
 	}
 
-	void SetEndDate(String name)
+	void SetCourseID(String id)
 	{
+	   courseId = id;
 	}
 
-	void SetDays(String[] name)
+	void SetCourseRegNum(String num)
 	{
+	   regnum = num;
 	}
 
-	void SetClassTime(String name)
+	void SetInstructorName(String name)
 	{
+	   instructorname = name;
+	}
+		
+	void SetCourseDescription(String desc)
+	{
+	   coursedescription = desc;
 	}
 	
+	void SetCourseDate(String date)
+	{
+	   coursedate = date;
+	}
+
+	void SetDays(String days)
+	{
+	   classdays = days;
+	}
+
+	void SetClassTime(String time)
+	{
+	   classtime = time;
+	}
+	
+	void SetClassFee(String fee)
+	{
+	   classfee = fee;	
+	}
 }

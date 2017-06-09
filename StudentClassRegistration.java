@@ -11,8 +11,9 @@ public class StudentClassRegistration
       final int COURSE_LIST = 0;
 	  final int REG_STATUS = 1;
 	  final int STUDENT_PROFILE = 2;
-	  
-//** start ttudent data test code	  
+
+/*	  
+//** start student data test code	  
 	  Student student;
 	  int index, count;	
 	  
@@ -35,8 +36,34 @@ public class StudentClassRegistration
 	  student.SetUserPassword("rgnewpassword");
 	  studentfile.SetStudentRecord("100", student);
 //** end student data test code
+*/
+/*	  
+//** start course list data test code	  
+	  Course course;
+	  int index, count;	
 	  
+	  CourseListFileData coursefile = new CourseListFileData();
+	  count = coursefile.GetCourseCount();
+	  course = new Course();
 	  
+	  for ( index = 0; index < count; index++ )
+	  {	  
+		 coursefile.GetCourse(index, course);	  
+	     System.out.println(course.GetCourseName());
+	     System.out.println(course.GetCourseID());
+	     System.out.println(course.GetRegistratrionNum());
+	     System.out.println(course.GetInstructorName());
+	     System.out.println(course.GetCourseDescription());
+	     System.out.println(course.GetClassDate());
+	     System.out.println(course.GetDays());
+	     System.out.println(course.GetClassFee());
+	     System.out.println(" ");
+	  }
+	  	  
+//** end course data test code
+*/
+	  
+/*	  
 	  // Instatiate screen objects
 	  ConsoleUI[] screen = new ConsoleUI[3];
 	  screen[COURSE_LIST] = new Screen1();
@@ -62,7 +89,7 @@ public class StudentClassRegistration
 		  }
 		   
 	  } 
-	    
+*/	    
    }
 }
 

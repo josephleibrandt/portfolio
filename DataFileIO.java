@@ -9,47 +9,116 @@ import interfacepackage.*;
 
 
 //****************************************************************************************
-// This class implements the design for accessing and storing college course records
-// which are stored in a single file TBD
+//This class implements the design for accessing college course list info
+//which are stored in a single file courselistdata.txt
 //****************************************************************************************
-class CourseRecordsFileData implements CourseRecordsInterface
+class CourseListFileData implements CourseListDataInterface
 {
-	private Course course;
-	
-	
-	CourseRecordsFileData(){}
+	private java.io.File file;
+	private int coursecount;
+	   
+	CourseListFileData()
+	{
+	   // open file if it exists, if not create it
+	   file = new java.io.File("courselistdata.txt");
+	   if (!file.exists())
+	   {		  
+		  try
+		  {
+			 PrintWriter writer = new PrintWriter("courselistdata.txt", "UTF-8");
+			 // initialize empty file with count data
+			 writer.println("0");
+			 writer.close();
+		  } 
+		  catch (IOException e) 
+		  {
+			 // do something
+			 System.out.println("courselistdata.txt file open failed");
+			 return;
+		  }	     
+	   }
+		  
+	   GetCourseCount();
+	}
 	
 	public int GetCourseCount()
 	{
-	   return 0;	
+	   try
+	   {
+		  Scanner input = new Scanner(file);
+		  coursecount = Integer.parseInt(input.next());
+		  input.close();
+	   }
+	   catch (IOException e) 
+	   {
+		  System.out.println("courselistdata.txt file scanner failed");
+		  return -1;
+	   }
+	   
+	   return coursecount;	
 	}
 	
 	public boolean GetCourse(int index, Course course)
 	{
+	   int count, i;
+	   boolean done1;
+	   String teststr;
+		  
+	   try
+	   {
+		  Scanner input = new Scanner(file);
+		  input.useDelimiter("\r\n");
+		  
+		  input.next();  // skip course count
+		  input.next();  // skip empty line
+		  
+		  // move to indexed class info section
+		  for ( count = 0; count < index; count++ )
+		  {	 
+			 done1 = false;
+			 while (done1 == false)
+			 {
+				teststr = input.next();
+				if (teststr.equals("end") == true)
+				   done1 = true;	   
+			 }
+			 input.next(); // skip over empty line
+		  }
+			 
+		  //  access all course data from text file and copy to Course object 
+		  // get file data for course name
+		  course.SetCourseName(input.next());
+          course.SetCourseID(input.next());
+          course.SetCourseRegNum(input.next());
+          course.SetInstructorName(input.next());
+          course.SetCourseDescription(input.next());
+          course.SetCourseDate(input.next());
+          course.SetDays(input.next());
+          course.SetClassTime(input.next());
+          course.SetClassFee(input.next());
+		     	     
+		  input.close();
+	   }
+	   catch (IOException e) 
+	   {
+		  System.out.println("courselistdata.txt file scanner failed");
+		  return false;
+	   }
+	 		
 	   return true;	
 	}
-	
-	public boolean AddCourse(Course course)
-	{
-	   return true;	
-	}
-	
-	public boolean DeleteCourse(int index)
-	{
-		return true;
-	}
-}
 
+}
 
 //****************************************************************************************
 // This class implements the design for accessing and storing an individual student record
-// which are stored in a single student file TBD
+// which are stored in a single student file studentdata.txt
 //****************************************************************************************
 class StudentFileData implements StudentRecordsInterface
 {	
-//   private Student student;
    private java.io.File file;
    private int recordcount;
+   
    
    StudentFileData()
    {
@@ -67,14 +136,13 @@ class StudentFileData implements StudentRecordsInterface
 	     catch (IOException e) 
 	     {
 		    // do something
-		    System.out.println("Ouch!");
+		    System.out.println("studentdata.txt file open failed");
 		    return;
 	     }	     
 	  }
 	  
      GetRecordCount();
-     System.out.println("record count = " + recordcount);
-
+//     System.out.println("record count = " + recordcount);
    }
    
    public int GetRecordCount()
@@ -87,11 +155,13 @@ class StudentFileData implements StudentRecordsInterface
 	  }
 	  catch (IOException e) 
 	  {
-		 System.out.println("Ouch!"); 
+		 System.out.println("studentdata.txt file scanner failed");
+		 return -1;
 	  }
+	  
 	  return recordcount;
    }
-   
+
    public int IsStudentListed(String lastname, String firstname)
    {
 	  String recordlastname;
@@ -136,7 +206,7 @@ class StudentFileData implements StudentRecordsInterface
 	  }
 	  catch (IOException e) 
 	  {
-		 System.out.println("Ouch!");
+		 System.out.println("studentdata.txt file scanner failed");
 		 done = false;
 		 count = -1;
 	  }
@@ -186,7 +256,7 @@ class StudentFileData implements StudentRecordsInterface
 	  }
 	  catch (IOException e) 
 	  {
-	     System.out.println("Ouch!");
+	     System.out.println("studentdata.txt file scanner failed");
 	     return false;
 	  }
  
@@ -262,7 +332,7 @@ class StudentFileData implements StudentRecordsInterface
 	  catch (IOException e) 
 	  {
 	     // do something
-	     System.out.println("Ouch!");
+	     System.out.println("studentdatanew.txt file open failed");
 	     return false;
 	  }	     
 	   
