@@ -4,22 +4,13 @@ package mainpackage;
 // This class provides the student data base format for a student
 public class Student  
 {
-	private String firstname;
 	private String lastname;
+	private String firstname;
+	private String studentId;
 	private String username;
 	private String password;
-	private int studentId;
-	private int[] courseidlist;
-	private int coursecount;
 	
 	Student(){};
-	
-	Student(String firstname, String lastname, int studentId)
-	{
-	   this.firstname = firstname;
-	   this.lastname = lastname;
-	   this.studentId = studentId;
-	}
 
 	String GetFirstName()
 	{
@@ -41,39 +32,34 @@ public class Student
 	   return(password);
 	}
 	
-	int GetStudentID()
+	String GetStudentID()
 	{
 	   return(studentId);	
 	}
 
-	int GetCourseIDCount()
+	void SetLastName(String name)
 	{
-	   return coursecount; 
-	}
-	
-	int GetCourseID(int index)
-	{
-	   return(courseidlist[index]);
+	   lastname = name;
 	}
 
-	int SetUserName(String name)
+	void SetFirstName(String name)
 	{
-	   int result = 0;
-	  	
-	   return result;
+	   firstname = name;
 	}
 
-	int SetUserPassword(String name)
+	void SetStudentID(String id)
 	{
-	   int result = 0;
-	  	
-	   return result;
+	   studentId = id;
 	}
-	
-	
-	void AddCourseID(int id)
+
+	void SetUserName(String name)
 	{
-	
+	   username = name; 
+	}
+
+	void SetUserPassword(String pw)
+	{
+	   password = pw;
 	}
 	
 }

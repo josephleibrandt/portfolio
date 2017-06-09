@@ -11,7 +11,32 @@ public class StudentClassRegistration
       final int COURSE_LIST = 0;
 	  final int REG_STATUS = 1;
 	  final int STUDENT_PROFILE = 2;
-		   
+	  
+//** start ttudent data test code	  
+	  Student student;
+	  int index, count;	
+	  
+	  
+	  StudentFileData studentfile = new StudentFileData();
+	  count = studentfile.GetRecordCount();
+	  student = new Student();
+	  
+	  for ( index = 0; index < count; index++ )
+	  {	  
+	     studentfile.GetStudentRecord(index, student);	  
+	     System.out.println("Student " + index + " " + student.GetLastName() + ", " + student.GetFirstName());
+	     System.out.println("     ID " + student.GetStudentID());
+	     System.out.println("Username " + student.GetUserName() + ", Password " + student.GetPassword());
+	  }
+	  
+	  // change username and password for student ID "100"
+	  studentfile.GetStudentRecord("100", student);
+	  student.SetUserName("rgnewusername");
+	  student.SetUserPassword("rgnewpassword");
+	  studentfile.SetStudentRecord("100", student);
+//** end student data test code
+	  
+	  
 	  // Instatiate screen objects
 	  ConsoleUI[] screen = new ConsoleUI[3];
 	  screen[COURSE_LIST] = new Screen1();
@@ -36,7 +61,8 @@ public class StudentClassRegistration
 			  ((Screen3)screen[STUDENT_PROFILE]).ShowScreen();
 		  }
 		   
-	  }   
+	  } 
+	    
    }
 }
 
