@@ -153,7 +153,8 @@ class CourseRegistrationData implements CourseRecordsInterface
 	   int count, enrollmentcount, i;
 	   boolean done;	
 	   String temp;
-	   
+
+
 	   newfile = new java.io.File("courseenrollmentdatanew.txt");
 	   try
 	   {
@@ -163,12 +164,15 @@ class CourseRegistrationData implements CourseRecordsInterface
 		  // skip over first two lines
 		  writer.println(reader.nextLine());
 		  writer.println(reader.nextLine());
+		  
 		  for ( count = 0; count < coursecount; count++)
 		  {
 			 // compare course ID input with file entries
-			 if ( courseid.equals(reader.next()))
-			 {
-				writer.println(courseid); // copy course ID
+			 temp = reader.next(); 
+			 writer.println(temp); // copy course ID
+			 
+			 if ( courseid.equals(temp))
+			 {								
 				writer.println(reader.next()); // copy course enrollment max
 				temp = reader.next(); // access student enrollment count
 				enrollmentcount = Integer.parseInt(temp);
@@ -182,8 +186,8 @@ class CourseRegistrationData implements CourseRecordsInterface
                 // append new student ID
 				writer.println(studentid);
 				
-				writer.println("end");
-				writer.println(" ");					
+				writer.println(reader.next()); // copy "end" delimiter
+				writer.println(reader.nextLine()); // copy empty line					
 			 }
 			 else
 			 {	
@@ -196,7 +200,7 @@ class CourseRegistrationData implements CourseRecordsInterface
 		           {
 		        	  done = true;		        	   
 		           }
-		           writer.println(temp);		           
+		           writer.println(temp);
 		        }
 		        writer.println(" ");
 			 }   
@@ -221,6 +225,73 @@ class CourseRegistrationData implements CourseRecordsInterface
 	
 	public boolean UnEnrollStudenttoClass(String courseid, String studentid)
 	{
+	   // This must be done by copying current file with mods to
+	   // new file. Once completed, delete old file and rename new file
+	   java.io.File newfile;
+	   int count, enrollmentcount, i;
+	   boolean done;	
+	   String temp;
+	   
+	   newfile = new java.io.File("courseenrollmentdatanew.txt");
+	   try
+	   {
+		  Scanner reader = new Scanner(file);				 
+		  PrintWriter writer = new PrintWriter("courseenrollmentdatanew.txt", "UTF-8");
+			  
+		  // skip over first two lines
+		  writer.println(reader.nextLine());
+		  writer.println(reader.nextLine());
+		  for ( count = 0; count < coursecount; count++)
+		  {
+			 temp = reader.next(); // get course ID from file
+			 writer.println(temp); // copy course ID from file
+			 if ( courseid.equals(temp)) // compare entered ID with current file value
+			 {								
+				writer.println(reader.next()); // copy course enrollment max
+				temp = reader.next(); // access student enrollment count
+				enrollmentcount = Integer.parseInt(temp);
+				// decrement value and copy to new file 
+				writer.println(enrollmentcount - 1); 
+				// copy existing enrollment IDs except the one to be deleted
+				for ( i = 0; i < enrollmentcount; i++ )
+				{	
+				   temp = reader.next(); // get next student ID fot comaparison
+				   if ( !temp.equals(studentid)) // skip over / "delete" student ID from list
+				   writer.println(temp); 
+				}   
+					
+				writer.println(reader.next()); // copy "end" delimiter
+				writer.println(reader.nextLine()); // copy empty line					
+			 }
+			 else
+			 {	
+		        // copy all of the course record contents unmodified
+				done = false;
+		        while(done == false)
+		        {
+		           temp = reader.next();
+		           if ( temp.equals("end"))
+		           {
+		        	  done = true;		        	   
+		           }
+		           writer.println(temp);
+		        }
+		        writer.println(" ");
+			 }   
+		  }
+				 
+		  writer.close();
+		  reader.close();
+				 
+		  file.delete();
+		  newfile.renameTo(file);
+	   } 
+	   catch (IOException e) 
+	   {
+		  // do something
+		  System.out.println("courseenrollmentdatanew.txt file open failed");
+		  return false;
+	   }	     
 	
 	   return true;
 	}
