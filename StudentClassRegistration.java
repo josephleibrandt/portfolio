@@ -63,8 +63,8 @@ public class StudentClassRegistration
 //** end course data test code
 */
 	  
-/*	  
-	  // Instatiate screen objects
+	  
+	  // Instantiate screen objects
 	  ConsoleUI[] screen = new ConsoleUI[3];
 	  screen[COURSE_LIST] = new Screen1();
 	  screen[REG_STATUS] = new Screen2();
@@ -88,8 +88,7 @@ public class StudentClassRegistration
 			  ((Screen3)screen[STUDENT_PROFILE]).ShowScreen();
 		  }
 		   
-	  } 
-*/	    
+	  } 	    
    }
 }
 
