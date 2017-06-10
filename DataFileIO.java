@@ -3,10 +3,229 @@ package mainpackage;
 
 import java.io.*;
 import java.util.*;
-import java.text.*;
-import java.util.regex.*;
 import interfacepackage.*; 
 
+//****************************************************************************************
+//This class implements the design for managing the course registration storage info
+//which is stored in a single file courseenrollmentdata.txt
+//****************************************************************************************
+class CourseRegistrationData implements CourseRecordsInterface
+{
+	private java.io.File file;
+	private int coursecount;
+	
+	CourseRegistrationData()
+	{
+	   // open file if it exists, if not create it
+	   file = new java.io.File("courseenrollmentdata.txt");
+	   if (!file.exists())
+	   {		  
+		  try
+		  {
+		     PrintWriter writer = new PrintWriter("courseenrollmentdata.txt", "UTF-8");
+			 // initialize empty file with count data
+			 writer.println("0");
+			 writer.close();
+		  } 
+		  catch (IOException e) 
+		  {
+		     // do something
+			 System.out.println("courseenrollmentdata.txt file open failed");
+			 return;
+		  }	     
+	   }
+			  
+	   GetCourseCount();	   
+	}
+	
+	public int GetCourseCount()
+	{
+	   try
+	   {
+		  Scanner input = new Scanner(file);
+		  coursecount = Integer.parseInt(input.next());
+		  input.close();
+	   }
+	   catch (IOException e) 
+	   {
+		  System.out.println("courseenrollmentdata.txt file scanner failed");
+		  return -1;
+	   }
+	   
+	   return coursecount;	
+	}
+
+	public boolean GetCourseEnrollment(int index, ClassRegistration enrolldata)
+	{
+	   int count;
+	   boolean done1;
+	   String teststr;
+	   ArrayList<String> ids = new ArrayList<String>();
+	   
+	   try
+	   {
+		  Scanner input = new Scanner(file);
+		  input.useDelimiter("\r\n");
+			  
+		  input.next();  // skip course count
+		  input.next();  // skip empty line
+			  
+		  // move to indexed class info section
+		  for ( count = 0; count < index; count++ )
+		  {	 
+			 done1 = false;
+			 while (done1 == false)
+			 {
+			    teststr = input.next();
+				if (teststr.equals("end") == true)
+					done1 = true;	   
+			 }
+			 input.next(); // skip over empty line
+		  }
+				 
+		  //  access all class enrollment data from text file and copy to ClassRegistration object 	      
+		  enrolldata.SetCourseID(input.next());
+		  enrolldata.SetEnrollmentMax(input.next());
+		  enrolldata.SetEnrollmentCount(input.next());		
+		  // get all student Ids for this course
+		  done1 = false;
+		  while(done1 == false)
+		  {
+			 teststr = input.next();
+			 if (teststr.equals("end") == true)
+				  done1 = true;
+			 else
+			  	ids.add(teststr); 
+			  
+		  }
+		  enrolldata.SetStudentIDList(ids);		  
+		  ids.clear();
+		  input.close();
+	   }
+	   catch (IOException e) 
+	   {
+		  System.out.println("courselistdata.txt file scanner failed");
+		  return false;
+	   }
+		 		
+	   return true;	
+	}
+
+	public boolean GetCourseEnrollment(String courseid, ClassRegistration enrolldata)
+	{
+	   int count;
+			  
+	   // move to indexed class info section
+	   for ( count = 0; count < coursecount; count++ )
+	   {	 
+		  GetCourseEnrollment(count, enrolldata);
+		  if ( courseid.equals(enrolldata.GetCourseID()) )
+		  {
+			 return true;
+		  }
+	   }
+		  
+	   return false;	
+	}
+
+	public int GetClassEnrollmentMax(String courseid)
+	{
+	   
+	   return 0;	
+	}
+	
+	public int GetClassEnrollmentCount(String courseid)
+	{
+	   return 0;		
+	}
+	
+	public String GetStudentID(String courseid, int index)
+	{
+	   
+	   return(" ");	
+	}
+	
+	public boolean EnrollStudenttoClass(String courseid, String studentid)
+	{
+	   // This must be done by copying current file with mods to
+	   // new file. Once completed, delete old file and rename new file
+	   java.io.File newfile;
+	   int count, enrollmentcount, i;
+	   boolean done;	
+	   String temp;
+	   
+	   newfile = new java.io.File("courseenrollmentdatanew.txt");
+	   try
+	   {
+		  Scanner reader = new Scanner(file);				 
+		  PrintWriter writer = new PrintWriter("courseenrollmentdatanew.txt", "UTF-8");
+		  
+		  // skip over first two lines
+		  writer.println(reader.nextLine());
+		  writer.println(reader.nextLine());
+		  for ( count = 0; count < coursecount; count++)
+		  {
+			 // compare course ID input with file entries
+			 if ( courseid.equals(reader.next()))
+			 {
+				writer.println(courseid); // copy course ID
+				writer.println(reader.next()); // copy course enrollment max
+				temp = reader.next(); // access student enrollment count
+				enrollmentcount = Integer.parseInt(temp);
+				// increment value and copy to new file
+				writer.println(enrollmentcount + 1);
+				// copy existing enrollment IDs
+				for ( i = 0; i < enrollmentcount; i++ )
+				{	
+				   writer.println(reader.next()); 
+				}   
+                // append new student ID
+				writer.println(studentid);
+				
+				writer.println("end");
+				writer.println(" ");					
+			 }
+			 else
+			 {	
+		        // copy all of the course record contents unmodified
+				done = false;
+		        while(done == false)
+		        {
+		           temp = reader.next();
+		           if ( temp.equals("end"))
+		           {
+		        	  done = true;		        	   
+		           }
+		           writer.println(temp);		           
+		        }
+		        writer.println(" ");
+			 }   
+		  }
+			 
+		  writer.close();
+		  reader.close();
+			 
+		  file.delete();
+		  newfile.renameTo(file);
+	   } 
+	   catch (IOException e) 
+	   {
+		  // do something
+		  System.out.println("courseenrollmentdatanew.txt file open failed");
+		  return false;
+	   }	     
+
+		
+	   return true;	
+	}
+	
+	public boolean UnEnrollStudenttoClass(String courseid, String studentid)
+	{
+	
+	   return true;
+	}
+	
+}
 
 //****************************************************************************************
 //This class implements the design for accessing college course list info
@@ -60,7 +279,7 @@ class CourseListFileData implements CourseListDataInterface
 	
 	public boolean GetCourse(int index, Course course)
 	{
-	   int count, i;
+	   int count;
 	   boolean done1;
 	   String teststr;
 		  
@@ -219,7 +438,7 @@ class StudentFileData implements StudentRecordsInterface
    
    public boolean GetStudentRecord(int index, Student student)
    {	 
-	  int count, i;
+	  int count;
 	  boolean done1;
 	  String teststr;
 	  

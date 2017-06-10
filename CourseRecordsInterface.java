@@ -3,9 +3,11 @@ import mainpackage.*;
 
 public interface CourseRecordsInterface 
 {
-   public int GetCourseCount();
-   public boolean GetCourse(int index, Course course);
-   public boolean AddCourse(Course course);
-   public boolean DeleteCourse(int index);
-   
+   public int GetClassEnrollmentMax(String courseid);
+   public int GetClassEnrollmentCount(String courseid);
+   public String GetStudentID(String courseid, int index);
+   public boolean GetCourseEnrollment(int index, ClassRegistration data);
+   public boolean GetCourseEnrollment(String id, ClassRegistration data);
+   public boolean EnrollStudenttoClass(String courseid, String studentid);
+   public boolean UnEnrollStudenttoClass(String courseid, String studentid);   
 }

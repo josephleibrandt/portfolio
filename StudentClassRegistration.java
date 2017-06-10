@@ -37,6 +37,7 @@ public class StudentClassRegistration
 	  studentfile.SetStudentRecord("100", student);
 //** end student data test code
 */
+
 /*	  
 //** start course list data test code	  
 	  Course course;
@@ -61,6 +62,53 @@ public class StudentClassRegistration
 	  }
 	  	  
 //** end course data test code
+*/
+
+/*	  
+// ** start course enrollment data test	  
+	  ClassRegistration enrolldata;
+	  int index, count, i;
+	  ArrayList<String> pstudentidArray =  new ArrayList<String>();
+	  
+	  
+	  CourseRegistrationData enrollfile = new CourseRegistrationData();
+	  count = enrollfile.GetCourseCount();
+	  enrolldata = new ClassRegistration();
+	  
+	  for ( index = 0; index < count; index++ )
+	  {	  
+		  enrollfile.GetCourseEnrollment(index, enrolldata);
+		  System.out.println(enrolldata.GetCourseID());
+		  System.out.println(enrolldata.GetEnrollmentMax());
+		  System.out.println(enrolldata.GetEnrollmentCount());
+		  enrolldata.GetStudentIDList(pstudentidArray);
+		  for (i = 0; i < pstudentidArray.size(); i++)
+		  {
+			 System.out.println(pstudentidArray.get(i));  
+		  }
+		  
+		  System.out.println(" ");
+		  pstudentidArray.clear();
+	  }
+      
+//	  enrollfile.EnrollStudenttoClass("X.101.1", "105");
+	  
+	  System.out.println("Get data for class ID X.101.1:");
+	  enrollfile.GetCourseEnrollment("X.101.1", enrolldata);
+	  System.out.println(enrolldata.GetCourseID());
+	  System.out.println(enrolldata.GetEnrollmentMax());
+	  System.out.println(enrolldata.GetEnrollmentCount());
+	  enrolldata.GetStudentIDList(pstudentidArray);
+	  for (i = 0; i < pstudentidArray.size(); i++)
+	  {
+		 System.out.println(pstudentidArray.get(i));  
+	  }
+	  
+	  System.out.println(" ");
+	  pstudentidArray.clear();
+
+	  
+// ** end course enrollment data test	  
 */
 	  
 	  
@@ -88,7 +136,8 @@ public class StudentClassRegistration
 			  ((Screen3)screen[STUDENT_PROFILE]).ShowScreen();
 		  }
 		   
-	  } 	    
+	  }
+	   	    
    }
 }
 
