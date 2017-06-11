@@ -1,5 +1,0 @@
-lastName,firstName,studentId,userName,passWord
-Girard,Robert,100,rguname,rgpassword
-Wilson,Clint,101,cwuname,cwpassword
-Leibrandt,Joseph,102,jluname,jlpassword
-Becirbegovic,Enis,103,ebuname,ebpassword
