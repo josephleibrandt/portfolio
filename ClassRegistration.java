@@ -64,4 +64,8 @@ public class ClassRegistration
 		  pstudentidArray.add(ids.get(i));
 	   }	   	   
 	}
+	
+	ArrayList<String> GetCourseEnrollment(){
+		return this.pstudentidArray;
+	}
 }

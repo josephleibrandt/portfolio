@@ -1,7 +1,6 @@
 package mainpackage;
 
 import java.io.*;
-
 import java.util.*;
 import java.text.*;
 import java.math.*;
@@ -18,7 +17,7 @@ public abstract class ConsoleUI implements CourseUIInterface
    
    public void header()
    {
-	   System.out.println("############################");
+	   System.out.println("\n############################");
    }
    
    public void className(String course)
@@ -38,6 +37,13 @@ public abstract class ConsoleUI implements CourseUIInterface
 
    }
    
+   public void footer() 
+   {
+	    
+
+   }
+   
+   
    public static void clearConsole() {
        //Clears Screen in java
        try {
@@ -50,13 +56,52 @@ public abstract class ConsoleUI implements CourseUIInterface
        }
    }
    
+
+   public static String Padding(String s, int colWidth, String paddingType) {
+       int lenght = s.trim().length();
+       int totFreeSpace = colWidth - lenght;        
+
+       
+       if (paddingType == "center") {
+           int left = (totFreeSpace / 2) + lenght + 1;
+           String s1 = String.format("%1$-" + left + "s", s);
+           String s2 = String.format("%1$" + colWidth + "s", s1);
+           return s2;
+       } else if (paddingType == "rightcenter") {
+           int left = (colWidth / 2) + 1;
+           String s1 = String.format("%1$" + left + "s", s);
+           String s2 = String.format("%1$-" + colWidth + "s", s1);
+           return s2;
+       } else if (paddingType == "leftcenter") {
+           int left = (colWidth / 2) + 2;
+           String s1 = String.format("%1$-" + left + "s", s);
+           String s2 = String.format("%1$" + colWidth + "s", s1);
+           return s2;
+       } else if (paddingType == "right") {
+           String s2 = String.format("%1$" + colWidth + "s", s);
+           return s2;
+       } else if (paddingType == "left") {
+           int left = colWidth / 2;
+           String s1 = String.format("%1$-" + colWidth + "s", s);
+           String s2 = String.format("%1$" + left + "s", s1);
+           return s2;
+       } else {
+           String e = "Error:!?";
+           int left = (totFreeSpace / 2) + lenght + 1;
+           String s1 = String.format("%1$-" + left + "s", e);
+           String s2 = String.format("%1$" + colWidth + "s", s1);
+           return s2;
+       }
+
+   }
+   
    
 }
 
 
-class Screen1 extends ConsoleUI
+class LogInScreen extends ConsoleUI
 {
-	public Screen1(){}
+	public LogInScreen(){}
 	
 	public void ShowScreen()
 	{
@@ -70,36 +115,35 @@ class Screen1 extends ConsoleUI
 		
 	}
 	
-	public void contentBuilder() {
-		System.out.println("Course Catalog for Summer 2017");
-		System.out.println("Course ID	Date		Course Description	Enrollment Limit");
-		
+	@Override
+	public void header(){
+		  
+	}
 	
-		//create a string arraylist
-
-		ArrayList<String> courseList = new ArrayList<String>();
-		//populate the array for now with a hardcoded list
-			
-			courseList.add("Java 102     	Summer 2017	Advanced Java		6 out of 12 students enrolled");
-			courseList.add("Java 101	Summer 2017	Intro to Java		10 out of 12 students enrolled");
-			courseList.add("Hadoop 223	Summer 2017	Advanced Hadoop		3 out of 20 students enrolled");
-			courseList.add("Data Sci 101	Summer 2017	Intro to Data Science	11 out of 12 students enrolled");
-		//sort the list of strings
-
-		Collections.sort(courseList);
-
-		//This will be coming from a file
-
-		for (String s : courseList) {
-		System.out.println(s);}
+	@Override
+	public void separator(){
+	 
+	}
+	
+	@Override
+	public void closeHeader(){
 		
+ 	}
+	
+	@Override
+	public void footer(){
+		
+	}
+	
+	public void contentBuilder() {
+		System.out.println("\n\n\ncreate content here\n\n\n");
 	}
 }
 
 
-class Screen2 extends ConsoleUI
+class  RegistrationStatusScreen extends ConsoleUI
 {
-	public Screen2(){}
+	public RegistrationStatusScreen(){}
 		
 	public void ShowScreen()
 	{
@@ -113,16 +157,39 @@ class Screen2 extends ConsoleUI
 		
 	}
 	
+	@Override
+	public void header(){
+	 
+	}
+	
+	@Override
+	public void separator(){
+	 
+	}
+	
+	@Override
+	public void closeHeader(){
+	 
+	}
+	
+	@Override
+	public void footer(){
+		
+	}
+	
 	public void contentBuilder() {
+		
+		System.out.println("After registration was succesful. Send a message.");
+
 		System.out.println("\n\n\ncreate content here\n\n\n");
 	}
 
 }
 
 
-class Screen3 extends ConsoleUI
+class StudentProfileScreen extends ConsoleUI
 {
-	public Screen3(){}
+	public StudentProfileScreen(){}
 		
 	public void ShowScreen()
 	{
@@ -136,27 +203,127 @@ class Screen3 extends ConsoleUI
 		
 	}
 	
-	public void contentBuilder() {
-	    System.out.println("List of Courses");
-		
-		
+	@Override
+	public void header(){
+		  System.out.println(" ____________________________________________________________________________________________________________________");
+	      System.out.println("|             field1            |   field2       |    field3      |    field4      |      field3    |   field N      |");
+	      System.out.println("|_______________________________|________________|________________|________________|________________|________________|");
+
+	}
 	
-		//create a string arraylist
+	@Override
+	public void separator(){
+	 
+	}
+	
+	@Override
+	public void closeHeader(){
+		 
+	}
+	
+	@Override
+	public void footer(){
+		 System.out.println("|_______________________________|________________|________________|________________|________________|________________|");
+	}
+	
+	
+	
+	
+	public void contentBuilder() {
+		System.out.println("List all the classes student is registred for");
 
-		ArrayList<String> courseList = new ArrayList<String>();
-		//populate the array for now with a hardcoded list
-			
-			
-			courseList.add("Hadoop 223");
-			courseList.add("Data Sci 101");
-
-		Collections.sort(courseList);
-
-		//This will be coming from a file
-
-		for (String s : courseList) {
-		System.out.println(s);}
-		
+		System.out.println("\n\n\ncreate content here\n\n\n");
 	}
 
+}
+
+
+
+class AvailableCourseScreen extends ConsoleUI
+{
+	public AvailableCourseScreen(){}
+		
+	public void ShowScreen()
+	{
+		ConsoleUI.clearConsole();
+		super.header();
+		super.className("Screen 3: ");
+		super.closeHeader();
+		this.contentBuilder();
+		super.separator();
+		
+		
+	}
+	
+	@Override
+	public void header(){
+	 
+	}
+	
+	@Override
+	public void separator(){
+	 
+	}
+	
+	@Override
+	public void closeHeader(){
+	 
+	}
+	
+	@Override
+	public void footer(){
+		
+	}
+	public void contentBuilder() {
+		System.out.println("List Avaialbe course to register for");
+
+		System.out.println("\n\n\ncreate content here\n\n\n");
+	}
+
+}
+
+
+
+
+class GoodByeScren extends ConsoleUI
+{
+	public GoodByeScren(){}
+	
+	public void ShowScreen()
+	{
+		ConsoleUI.clearConsole();
+		super.header();
+		super.className("Screen 1: ");
+		super.closeHeader();
+		this.contentBuilder();
+		super.separator();
+		
+		
+	}
+	
+	@Override
+	public void header(){
+	 
+	}
+	
+	@Override
+	public void separator(){
+	 
+	}
+	
+	@Override
+	public void closeHeader(){
+	 
+	}
+	
+	@Override
+	public void footer(){
+		
+	}
+	
+	public void contentBuilder() {
+		System.out.println("List Avaialbe course to register for");
+
+		System.out.println("\n\n\ncreate content here\n\n\n");
+	}
 }
