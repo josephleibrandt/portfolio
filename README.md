@@ -4,8 +4,12 @@ Attached Zipfile is an Eclipse project. It can be run in Eclipse, however, it wa
 
 ## How to run the app 
 
-1. unzip the folder at the location of your choosing. 
-2. 
+1. unzip the folder in a location of your choosing.
+2. At this point your can import the application into Eclipse if so desired
+3. You can this directly in your console by open the command console, navigating to the project folder called StudentRegistrationApp. From this folder run the command -> java  StudentClassRegistration
+
+NOTE: to be able to run application you will need the password and username since the application has logging and validation capability.
+
 ### Markdown
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
