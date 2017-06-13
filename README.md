@@ -2,8 +2,10 @@
 
 Attached Zipfile is an Eclipse project. It can be run in Eclipse, however, it was designed to run in console.
 
-##How to run the app 
+## How to run the app 
 
+1. unzip the folder at the location of your choosing. 
+2. 
 ### Markdown
 
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
