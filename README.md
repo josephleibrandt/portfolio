@@ -14,5 +14,5 @@ C:\Path_to_student_registration_app\StudentRegistrationApp> java  StudentClassRe
 
 ```
 
-NOTE: to be able to run the application you will need the password and username since the application has logging and validation capability. All passwords and username (all are fake obviously :)) are stored in studentdata.txt file.
+NOTE: to be able to run the application you will need a password and a username since the application has logging and validation capability. All passwords and usernames (all are fake obviously :)) are stored in studentdata.txt file.
  
