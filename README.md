@@ -6,10 +6,10 @@ Attached Zipfile is an Eclipse project. It can be run in Eclipse, however, it wa
 
 1. unzip the folder in a location of your choosing.
 2. At this point your can import the application into Eclipse if so desired
-3. Alternatively you can run this directly in your console by open the command console (recommeded due to console clearning methods that work only in console), by navigating to the project folder called StudentRegistrationApp. From this folder run the command -> java  StudentClassRegistration
+3. Alternatively you can run this directly in your console by opennig the command line console (recommeded due to console clearning methods that work only in console), and navigating to the project folder called StudentApplicationApp. From this folder run the command -> java  StudentClassRegistration
 
 ```markdown
-C:\Path_to_student_registration_app\StudentRegistrationApp> java  StudentClassRegistration
+C:\Path_to_student_registration_app\StudentApplicationApp> java  StudentClassRegistration
 
 
 ```
